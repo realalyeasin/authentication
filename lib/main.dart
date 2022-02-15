@@ -1,9 +1,20 @@
+import 'package:authentication/screens/Home.dart';
 import 'package:authentication/screens/Screen_.dart';
 import 'package:authentication/screens/SignIn.dart';
+import 'package:authentication/screens/SignUp.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
+}
+
+void showSnackBar(BuildContext context, String message) async {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(message),
+      duration: const Duration(milliseconds: 2000),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -20,10 +31,10 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/' : (context) => Screen_(),
-        '/signin' : (context) => SignIn(),
-       // '/signUp' : (context) => SignUp(),
-      //  '/home' : (context) => Home()
+        '/': (context) => const Screen_(),
+        '/signin': (context) => const SignIn(),
+        '/signup': (context) => const SignUp(),
+        '/home': (context) => const Home()
       },
     );
   }

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class SignIn extends StatefulWidget {
-  const SignIn({Key? key}) : super(key: key);
+class SignUp extends StatefulWidget {
+  const SignUp({Key? key}) : super(key: key);
 
   @override
-  _SignInState createState() => _SignInState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _SignInState extends State<SignIn> {
+class _SignUpState extends State<SignUp> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -18,7 +18,7 @@ class _SignInState extends State<SignIn> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         elevation: 0,
-        title: Text('Sign In'),
+        title: const Text('Sign Up'),
       ),
       body: SafeArea(
         child: Center(
@@ -28,65 +28,69 @@ class _SignInState extends State<SignIn> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: Row(
                     children: [
                       Expanded(
-                          child: TextFormField(
-                        decoration: InputDecoration(
-                            border: UnderlineInputBorder(), hintText: 'Email'),
-                        controller: emailController,
-                      ))
+                        child: TextFormField(
+                          decoration: const InputDecoration(
+                            border: UnderlineInputBorder(),
+                            hintText: 'Email',
+                          ),
+                          controller: emailController,
+                        ),
+                      )
                     ],
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: Row(
                     children: [
                       Expanded(
-                          child: TextFormField(
-                        enableSuggestions: false,
-                        autocorrect: false,
-                        obscureText: true,
-                        decoration: InputDecoration(
+                        child: TextFormField(
+                          autocorrect: false,
+                          obscureText: true,
+                          enableSuggestions: false,
+                          decoration: const InputDecoration(
                             border: UnderlineInputBorder(),
-                            hintText: 'Password'),
-                        controller: passController,
-                      ))
+                            hintText: 'Password',
+                          ),
+                          controller: passController,
+                        ),
+                      )
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
-                Container(
+                SizedBox(
                   height: 40,
                   width: 300,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
+                      elevation: 10,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(35),
+                        borderRadius: BorderRadius.circular(30),
                       ),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       Navigator.pushNamed(context, '/home');
                     },
-                    child: const Text('Sign In'),
+                    child: const Text('Create Account'),
                   ),
                 ),
                 const SizedBox(
-                  height: 30,
+                  height: 24,
                 ),
                 InkWell(
-                  onTap: () => Navigator.pushNamed(context, '/signup'),
+                  onTap: () => Navigator.pop(context),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
-                      Text('Have no account yet?'),
-                      Text(
-                        'Sign Up',
-                      )
+                      Text('Already have an account?'),
+                      Text('Sign in')
                     ],
                   ),
                 )

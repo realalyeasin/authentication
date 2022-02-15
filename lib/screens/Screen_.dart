@@ -22,17 +22,24 @@ class _Screen_State extends State<Screen_> {
       body: SafeArea(
         child: Stack(
           children: [
-            Padding(padding: EdgeInsets.all(10),
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: Image.asset('assets/welcome.png',
-              width: itemWidth, height: itemHeight,),
-            ),),
+            Padding(
+              padding: EdgeInsets.all(10),
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Image.asset(
+                  'assets/welcome.png',
+                  width: itemWidth,
+                  height: itemHeight,
+                ),
+              ),
+            ),
             const Center(
-              child: Text('Authentication',
-              style: TextStyle(
-                fontSize: 20,
-              ),),
+              child: Text(
+                'Authentication',
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
             ),
           ],
         ),
@@ -41,9 +48,9 @@ class _Screen_State extends State<Screen_> {
   }
 
   @override
-  void didChangeDependencies(){
+  void didChangeDependencies() {
     super.didChangeDependencies();
-    Timer(Duration(milliseconds: 2000), (){
+    Timer(Duration(milliseconds: 2000), () {
       Navigator.pushNamed(context, '/signin');
     });
   }
