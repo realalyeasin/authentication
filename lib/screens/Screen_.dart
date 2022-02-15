@@ -14,10 +14,6 @@ class Screen_ extends StatefulWidget {
 class _Screen_State extends State<Screen_> {
   @override
   Widget build(BuildContext context) {
-    final query = MediaQuery.of(context);
-    final size = query.size;
-    final itemWidth = size.width * 0.3;
-    final itemHeight = itemWidth * (size.width / size.height);
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -28,8 +24,6 @@ class _Screen_State extends State<Screen_> {
                 alignment: Alignment.topCenter,
                 child: Image.asset(
                   'assets/welcome.png',
-                  width: itemWidth,
-                  height: itemHeight,
                 ),
               ),
             ),
@@ -51,7 +45,7 @@ class _Screen_State extends State<Screen_> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     Timer(Duration(milliseconds: 2000), () {
-      Navigator.pushNamed(context, '/signin');
+      Navigator.pushNamed(context, '/auth');
     });
   }
 }

@@ -1,4 +1,9 @@
+import 'dart:async';
+
+import 'package:authentication/auth_service.dart';
+import 'package:authentication/main.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/src/provider.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -18,7 +23,7 @@ class _SignInState extends State<SignIn> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         elevation: 0,
-        title: Text('Sign In'),
+        title: const Text('Sign In'),
       ),
       body: SafeArea(
         child: Center(
@@ -28,12 +33,13 @@ class _SignInState extends State<SignIn> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: Row(
                     children: [
                       Expanded(
                           child: TextFormField(
-                        decoration: InputDecoration(
+                            onChanged: (text) {},
+                        decoration: const InputDecoration(
                             border: UnderlineInputBorder(), hintText: 'Email'),
                         controller: emailController,
                       ))
@@ -41,15 +47,16 @@ class _SignInState extends State<SignIn> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: Row(
                     children: [
                       Expanded(
                           child: TextFormField(
+                            onChanged: (text) {},
                         enableSuggestions: false,
                         autocorrect: false,
                         obscureText: true,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             border: UnderlineInputBorder(),
                             hintText: 'Password'),
                         controller: passController,
@@ -57,7 +64,7 @@ class _SignInState extends State<SignIn> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 Container(
@@ -69,8 +76,11 @@ class _SignInState extends State<SignIn> {
                         borderRadius: BorderRadius.circular(35),
                       ),
                     ),
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/home');
+                    onPressed: () async {
+                      context.read<AuthenticationService>()
+                          .signIn(
+                        email: emailController.text.trim(),
+                        password: passController.text.trim());
                     },
                     child: const Text('Sign In'),
                   ),

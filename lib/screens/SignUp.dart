@@ -1,4 +1,7 @@
+import 'package:authentication/auth_service.dart';
+import 'package:authentication/main.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/src/provider.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -8,8 +11,8 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passController = TextEditingController();
+  TextEditingController eemailController = TextEditingController();
+  TextEditingController ppassController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -33,11 +36,12 @@ class _SignUpState extends State<SignUp> {
                     children: [
                       Expanded(
                         child: TextFormField(
+                          onChanged: (text) {},
                           decoration: const InputDecoration(
                             border: UnderlineInputBorder(),
                             hintText: 'Email',
                           ),
-                          controller: emailController,
+                          controller: eemailController,
                         ),
                       )
                     ],
@@ -49,6 +53,7 @@ class _SignUpState extends State<SignUp> {
                     children: [
                       Expanded(
                         child: TextFormField(
+                          onChanged: (text) {},
                           autocorrect: false,
                           obscureText: true,
                           enableSuggestions: false,
@@ -56,7 +61,7 @@ class _SignUpState extends State<SignUp> {
                             border: UnderlineInputBorder(),
                             hintText: 'Password',
                           ),
-                          controller: passController,
+                          controller: ppassController,
                         ),
                       )
                     ],
@@ -76,7 +81,14 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                     onPressed: () async {
-                      Navigator.pushNamed(context, '/home');
+                      final result = await context.read<AuthenticationService>().signUp(
+                          email: eemailController.text.trim(),
+                          password: ppassController.text.trim(),);
+                      showSnackBar(context, result!);
+                      if(result == 'Signed Up') {
+                        Navigator.popUntil(
+                            context, ModalRoute.withName('/auth'));
+                      }
                     },
                     child: const Text('Create Account'),
                   ),
