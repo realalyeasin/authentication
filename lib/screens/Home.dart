@@ -1,4 +1,9 @@
+import 'package:authentication/auth_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/src/provider.dart';
+
+import 'SignIn.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -8,6 +13,17 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  late User user;
+
+  @override
+  void initState() {
+    setState(() {
+      user = context.read<AuthenticationService>().getUser()!;
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,13 +34,18 @@ class _HomeState extends State<Home> {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> const SignIn()));
               },
               icon: Icon(Icons.logout))
         ],
       ),
-      body: Center(
-        child: Text('Home'),
+      body: Column(
+        children:  [
+          Center(
+            child: Text('Home'),
+          ),
+          Text(user.email.toString())
+        ],
       ),
     );
   }

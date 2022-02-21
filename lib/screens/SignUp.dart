@@ -11,8 +11,8 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  TextEditingController eemailController = TextEditingController();
-  TextEditingController ppassController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -41,7 +41,7 @@ class _SignUpState extends State<SignUp> {
                             border: UnderlineInputBorder(),
                             hintText: 'Email',
                           ),
-                          controller: eemailController,
+                          controller: emailController,
                         ),
                       )
                     ],
@@ -61,7 +61,7 @@ class _SignUpState extends State<SignUp> {
                             border: UnderlineInputBorder(),
                             hintText: 'Password',
                           ),
-                          controller: ppassController,
+                          controller: passController,
                         ),
                       )
                     ],
@@ -82,8 +82,8 @@ class _SignUpState extends State<SignUp> {
                     ),
                     onPressed: () async {
                       final result = await context.read<AuthenticationService>().signUp(
-                          email: eemailController.text.trim(),
-                          password: ppassController.text.trim(),);
+                          email: emailController.text.trim(),
+                          password: passController.text.trim(),);
                       showSnackBar(context, result!);
                       if(result == 'Signed Up') {
                         Navigator.popUntil(
